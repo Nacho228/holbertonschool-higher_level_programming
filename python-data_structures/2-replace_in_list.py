@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 def replace_in_list(my_list, idx, element):
-    if idx + 1 not in range(len(my_list)):
+    if idx not in range(len(my_list)) or idx < 0:
         return my_list
     else:
-        if idx < element or idx < 0:
+        if idx < element:
             my_list[idx] = element
             return my_list
         else:
