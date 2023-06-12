@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 def safe_print_integer(value):
     try:
-        int(value)
-        print("{}".format(value))
-        return True
+        if isinstance(value, int):
+            print("{}".format(value))
+            return True
     except ValueError:
+        pass
+    else:
         return False
