@@ -6,4 +6,5 @@ class Square:
     """
     Spongebob squarepants
     """
-    pass
+    def __init__(self, size):
+        self.__size = size
