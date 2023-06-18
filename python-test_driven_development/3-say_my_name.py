@@ -1,4 +1,18 @@
+#!/usr/bin/python3
+"""_summary_
+    """
+
 def say_my_name(first_name, last_name=""):
+    """
+
+    Args:
+        first_name (_type_): _description_
+        last_name (str, optional): _description_. Defaults to "".
+
+    Raises:
+        TypeError: _description_
+        TypeError: _description_
+    """
     if not isinstance(first_name, str):
         raise TypeError("first_name must be a string")
 
