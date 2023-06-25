@@ -1,0 +1,28 @@
+The `7-base_geometry` module
+======================
+
+Using ``{function}``
+-------------------
+
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    
+    >>> bg = BaseGeometry()
+
+    --- Testing area()  ---
+
+    >>> bg.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
+
+    --- Base Case ---
+    >>> bg.integer_validator("Jon", 12)
+
+    --- Value not an int case ---
+    >>> bg.integer_validator("Jon", "Snow")
+    Traceback (most recent call last):
+    TypeError: Jon must be an integer
+
+    --- Value less than 0 ---
+    >>> bg.integer_validator("Jon", -1)
+    Traceback (most recent call last):
+    ValueError: Jon must be greater than 0
