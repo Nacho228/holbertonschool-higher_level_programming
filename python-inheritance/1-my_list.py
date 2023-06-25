@@ -2,7 +2,7 @@
 """task 1 """
 
 
-class My_list(list):
+class MyList(list):
     """MY list class"""
     def print_sorted(self):
         """Print sortedlist"""
