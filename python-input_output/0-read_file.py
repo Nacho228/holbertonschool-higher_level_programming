@@ -3,7 +3,11 @@
 
 
 def read_file(filename=""):
+    """Read the contents of a file
+
+    Args:
+        filename (str, optional): _description_. Defaults to "".
+    """
     with open(filename, encoding="utf-8") as f:
-        for line in f:
-            print(line, end="")
-        print()
+        read_text = f.read()
+        print(f"{read_text}")
