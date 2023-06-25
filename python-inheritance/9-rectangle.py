@@ -27,12 +27,12 @@ class Rectangle(BaseGeometry):
         self.__height = height
 
     def area(self):
-        """ A simple function that returns the area of 
+        """ A simple function that returns the area of
         the class of self.
 
         Returns: Square area.
         """
         return (self.__height * self.__width)
-    
+
     def __str__(self):
         return f"[Rectangle] {self.__width}/{self.__height}"
