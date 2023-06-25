@@ -10,4 +10,4 @@ def read_file(filename=""):
     """
     with open(filename, encoding="utf-8") as f:
         read_text = f.read()
-        print(f"{read_text}")
+        print("{}".format(read_text), end="")
