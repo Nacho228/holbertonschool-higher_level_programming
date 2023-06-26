@@ -17,14 +17,15 @@ class Rectangle(Base):
             id inherited from super().
         """
         self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
-        super().__init__(id)
         self.integer_validator("width", width)
+        self.__height = height
         self.integer_validator("height", height)
+        self.__x = x
         self.x_or_y("x", x)
+        self.__y = y
         self.x_or_y("y", y)
+        super().__init__(id)
+        
 
 
 "Getters and setter"
