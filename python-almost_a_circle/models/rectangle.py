@@ -21,6 +21,10 @@ class Rectangle(Base):
         self.__x = x
         self.__y = y
         super().__init__(id)
+        self.integer_validator("width", width)
+        self.integer_validator("height", height)
+        self.x_or_y("x", x)
+        self.x_or_y("y", y)
 
 
 "Getters and setter"
