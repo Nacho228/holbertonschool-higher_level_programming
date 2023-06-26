@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" Another class, rectangle this time """
 from models.base import Base
+""" Another class, rectangle this time """
 
 
 class Rectangle(Base):
@@ -26,49 +26,41 @@ class Rectangle(Base):
 "Getters and setter"
 
 
-@property
 def width(self):
     """ width getter """
     return self.__width
 
 
-@width.setter
 def width(self, value):
     """width setter"""
     self.__width = value
 
 
-@property
 def height(self):
     """height getter"""
     return self.__height
 
 
-@height.setter
 def height(self, value):
     """heigth setter"""
     self.__height = value
 
 
-@property
 def x(self):
     """x getter"""
     return self.__x
 
 
-@x.setter
 def x(self, value):
     """x setter"""
     self.__x = value
 
 
-@property
 def y(self):
     """y getter"""
     return self.__y
 
 
-@y.setter
 def y(self, value):
     """y setter"""
     self.__y = value
