@@ -10,7 +10,6 @@ class Base:
     def __init__(self, id=None):
         """ initialization of id"""
 
-        __nb_objects = 0
         if id is not None:
             self.id = id
         else:
