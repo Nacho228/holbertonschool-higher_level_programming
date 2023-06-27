@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Another class, rectangle this time """
+"""Another class, rectangle this time"""
 from models.base import Base
 
 
@@ -15,9 +15,12 @@ class Rectangle(Base):
             x (int, optional): Width number. Defaults to 0.
             y (int, optional): Height number. Defaults to 0.
             id inherited from super().
+
+        Return: nothing.
         """
         super().__init__(id)
         self.__width = width
+        self.integer_validator("width", width )
         self.__height = height
         self.integer_validator("height", height)
         self.__x = x
@@ -43,7 +46,7 @@ class Rectangle(Base):
 
     @height.setter
     def height(self, value):
-        """heigth setter"""
+        """height setter"""
         self.integer_validator("height", value)
         self.__height = value
 
