@@ -25,6 +25,8 @@ class Base:
 
     
     def x_or_y(self, name, value):
+        if type(value) is not int:
+            raise TypeError(f"{name} must be an integer")
         if value < 0:
             raise ValueError(f"{name} must be >= 0")
         self.name = value
