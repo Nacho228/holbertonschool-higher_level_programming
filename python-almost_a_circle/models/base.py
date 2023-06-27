@@ -21,13 +21,10 @@ class Base:
             raise TypeError(f"{name} must be an integer")
         elif value <= 0:
             raise ValueError(f"{name} must be greater than 0")
-        else:
-            self.name = name
+        self.name = value
 
     
     def x_or_y(self, name, value):
         if value < 0:
             raise ValueError(f"{name} must be >= 0")
-        else:
-            self.value = value
-            self.name = name
+        self.name = value

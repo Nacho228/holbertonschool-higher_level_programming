@@ -16,15 +16,16 @@ class Rectangle(Base):
             y (int, optional): Height number. Defaults to 0.
             id inherited from super().
         """
-        self.__width = width
-        self.integer_validator("width", width)
-        self.__height = height
-        self.integer_validator("height", height)
-        self.__x = x
-        self.x_or_y("x", x)
-        self.__y = y
-        self.x_or_y("y", y)
         super().__init__(id)
+        self.width = width
+        self.integer_validator("width", width)
+        self.height = height
+        self.integer_validator("height", height)
+        self.x = x
+        self.x_or_y("x", x)
+        self.y = y
+        self.x_or_y("y", y)
+        
         
 
 
@@ -40,7 +41,12 @@ def width(self):
 @width.setter
 def width(self, value):
     """width setter"""
-    self.__width = value
+    if type(value) is not int:
+            raise TypeError("width must be an integer")
+    if value <= 0:
+            raise ValueError("width must be greater than 0")
+    else:
+        self.__width = value
 
 
 @property
@@ -52,6 +58,10 @@ def height(self):
 @height.setter
 def height(self, value):
     """heigth setter"""
+    if type(value) is not int:
+            raise TypeError("height must be an integer")
+    if value <= 0:
+            raise ValueError("height must be greater than 0")
     self.__height = value
 
 
@@ -64,6 +74,10 @@ def x(self):
 @x.setter
 def x(self, value):
     """x setter"""
+    if type(value) is not int:
+            raise TypeError("x must be an integer")
+    if value <= 0:
+            raise ValueError("x must be >= 0")
     self.__x = value
 
 
@@ -76,4 +90,6 @@ def y(self):
 @y.setter
 def y(self, value):
     """y setter"""
+    if value <= 0:
+            raise ValueError("y must be >= 0")
     self.__y = value
