@@ -24,6 +24,17 @@ class Base:
             self.id = Base.__nb_objects
 
     def integer_validator(self, name, value):
+        """ Integer validator, checks whether is
+        a int, or is below 0
+
+            Args:
+                name (int): name of the instance
+                value (int): value
+
+            Raises:
+                TypeError: checks typerror
+                ValueError: checks valuerror
+            """
         if type(value) is not int:
             raise TypeError(f"{name} must be an integer")
         elif value <= 0:
@@ -31,6 +42,16 @@ class Base:
         self.name = value
 
     def x_or_y(self, name, value):
+        """x_or_y
+
+        Args:
+            name (int): name of the instance
+            value (int): value
+
+        Raises:
+            TypeError: checks typerror
+            ValueError: checks valuerror
+        """
         if type(value) is not int:
             raise TypeError(f"{name} must be an integer")
         if value < 0:
