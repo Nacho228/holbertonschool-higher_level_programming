@@ -3,7 +3,14 @@
 
 
 class Base:
-    """Base class"""
+    """Base class
+
+    Raises:
+        TypeError: checks for typeerror
+        ValueError: checks for valueerror
+        TypeError: checks for typerror
+        ValueError: checks for valuerror
+    """
 
     __nb_objects = 0
 
@@ -23,7 +30,6 @@ class Base:
             raise ValueError(f"{name} must be greater than 0")
         self.name = value
 
-    
     def x_or_y(self, name, value):
         if type(value) is not int:
             raise TypeError(f"{name} must be an integer")
