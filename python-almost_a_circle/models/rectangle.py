@@ -20,13 +20,19 @@ class Rectangle(Base):
         """
         super().__init__(id)
         self.__width = width
-        self.integer_validator("width", width )
+        self.integer_validator("width", width)
         self.__height = height
         self.integer_validator("height", height)
         self.__x = x
         self.x_or_y("x", x)
         self.__y = y
         self.x_or_y("y", y)
+
+    def area(self):
+        """area of the rectangle
+
+        Return: area of the rectangle(width * height)"""
+        return (self.__width * self.__height)
 
     @property
     def width(self):
