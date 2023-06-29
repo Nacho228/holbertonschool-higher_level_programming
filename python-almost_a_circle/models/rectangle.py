@@ -119,6 +119,7 @@ class Rectangle(Base):
         self.__y = value
 
     def to_dictionary(self):
+        """ Rectangle instance to dictionary representation """
         a = self.__width
         b = self.__height
         return dict(id=self.id, width=a, height=b, x=self.__x, y=self.__y)
