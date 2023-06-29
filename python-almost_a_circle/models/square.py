@@ -42,4 +42,4 @@ class Square(Rectangle):
 
     def to_dictionary(self):
         """ Rectangle instance to dictionary representation """
-        return dict(id=self.id, size=self.size, x=self.__x, y=self.__y)
+        return dict(id=self.id, size=self.size, x=self.x, y=self.y)
