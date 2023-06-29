@@ -69,6 +69,7 @@ class Rectangle(Base):
             attrs = ['id', 'width', 'height', 'x', 'y']
             for arg, attr in zip(args, attrs):
                 setattr(self, attr, arg)
+        elif kwargs:
             for k, v in kwargs.items():
                 setattr(self, k, v)
 
