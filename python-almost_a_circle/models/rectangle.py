@@ -41,11 +41,21 @@ class Rectangle(Base):
 
         Returns: None
         """
-        printer = ""
         for h in range(self.__height):
             for w in range(self.__width):
                 print("#", end="")
             print()
+
+    def __str__(self):
+        """Returns a string representation of the
+        self class
+
+        Returns:
+            Rectangle and its attributes
+        """
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.__x, self.__y, self.__width, self.__height
+        )
 
     @property
     def width(self):
