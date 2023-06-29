@@ -62,6 +62,9 @@ class Rectangle(Base):
         )
 
     def update(self, *args, **kwargs):
+        """updates and assigns attributes to a
+        variable number of arguments
+        """
         if args:
             attrs = ['id', 'width', 'height', 'x', 'y']
             for arg, attr in zip(args, attrs):
