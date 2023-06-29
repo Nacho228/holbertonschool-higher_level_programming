@@ -61,6 +61,14 @@ class Rectangle(Base):
             self.id, self.__x, self.__y, self.__width, self.__height
         )
 
+    def update(self, *args, **kwargs):
+        if args:
+            attrs = ['id', 'width', 'height', 'x', 'y']
+            for arg, attr in zip(args, attrs):
+                setattr(self, attr, arg)
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+
     @property
     def width(self):
         """ width getter """
