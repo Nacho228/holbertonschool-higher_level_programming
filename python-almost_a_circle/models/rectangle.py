@@ -29,10 +29,23 @@ class Rectangle(Base):
         self.x_or_y("y", y)
 
     def area(self):
-        """area of the rectangle
+        """
+        Area of the rectangle
 
         Return: area of the rectangle(width * height)"""
         return (self.__width * self.__height)
+
+    def display(self):
+        """
+        Prints in stdout the Rectangle
+
+        Returns: None
+        """
+        printer = ""
+        for h in range(self.__height):
+            for w in range(self.__width):
+                print("#", end="")
+            print()
 
     @property
     def width(self):
