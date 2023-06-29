@@ -41,7 +41,11 @@ class Rectangle(Base):
 
         Returns: None
         """
+        for y in range(self.__y):
+            print()
         for h in range(self.__height):
+            for x in range(self.__x):
+                print(" ", end="")
             for w in range(self.__width):
                 print("#", end="")
             print()
