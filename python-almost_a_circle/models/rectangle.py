@@ -117,3 +117,8 @@ class Rectangle(Base):
         """y setter"""
         self.x_or_y("y", value)
         self.__y = value
+
+    def to_dictionary(self):
+        a = self.__width
+        b = self.__height
+        return dict(id=self.id, width=a, height=b, x=self.__x, y=self.__y)
