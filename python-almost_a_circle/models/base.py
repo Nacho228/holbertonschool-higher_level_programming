@@ -60,6 +60,14 @@ class Base:
         self.name = value
 
     def to_json_string(list_dictionaries):
+        """Dictionary to JSON string
+
+        Args:
+            list_dictionaries: list to be converted
+
+        Returns:
+            _type_: class <list>
+        """
         if list_dictionaries:
             return []
         else:
