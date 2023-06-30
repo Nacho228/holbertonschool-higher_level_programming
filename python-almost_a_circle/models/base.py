@@ -72,4 +72,4 @@ class Base:
             return ("[]")
         else:
             json_string = json.dumps(list_dictionaries)
-        return(json_string)
+        return (json_string)
