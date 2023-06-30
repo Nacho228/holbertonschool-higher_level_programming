@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """New class"""
 from models.rectangle import Rectangle
+import json
 
 
 class Square(Rectangle):

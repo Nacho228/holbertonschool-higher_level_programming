@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ task 1 python almost a circle"""
+import json
 
 
 class Base:
@@ -57,3 +58,10 @@ class Base:
         if value < 0:
             raise ValueError(f"{name} must be >= 0")
         self.name = value
+
+    def to_json_string(list_dictionaries):
+        if list_dictionaries:
+            return []
+        else:
+            json_string = json.dumps(list_dictionaries)
+        print(json_string)
