@@ -59,6 +59,7 @@ class Base:
             raise ValueError(f"{name} must be >= 0")
         self.name = value
 
+    @staticmethod
     def to_json_string(list_dictionaries):
         """Dictionary to JSON string
 
@@ -72,4 +73,20 @@ class Base:
             return ("[]")
         else:
             json_string = json.dumps(list_dictionaries)
-        return (json_string)
+            return (json_string)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """
+        Save list_objs to a JSON file
+
+        Args:
+            list_objs: list of instances to be saved
+        """
+        if list_objs is None:
+            list_objs = []
+
+        json = cls.to_json_string([obj.to_dictionary() for obj in list_objs])
+        filename = "{}.json".format(cls.__name__)
+        with open(filename, 'w+') as file:
+            file.write(json)
