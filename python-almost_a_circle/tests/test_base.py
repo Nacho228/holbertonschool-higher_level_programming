@@ -1,7 +1,26 @@
 #!/usr/bin/python3
 """test each method"""
 import unittest
-from models.base import Base
+import pep8
+from models import base
+from models import rectangle
+Base = base.Base
+Rectange = rectangle.Rectangle
+
+
+class TestPep8(unittest.TestCase):
+    """
+    Test class to check PEP 8 compliance in specific files.
+    """
+    def test_pep8(self):
+        """
+        Check PEP 8 compliance in the specified files.
+        """
+        style = pep8.StyleGuide(quiet=False)
+        errors = 0
+        files = ["models/base.py", "tests/test_base.py"]
+        errors += style.check_files(files).total_errors
+        self.assertEqual(errors, 0, 'Need to fix Pep8')
 
 
 class TestBase(unittest.TestCase):
