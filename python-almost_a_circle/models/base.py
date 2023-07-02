@@ -98,3 +98,18 @@ class Base:
         else:
             dictData = json.loads(json_string)
             return dictData
+
+    @classmethod
+    def create(cls, **dictionary):
+        """ Creates a new instance of a class
+        and updates it with update method
+
+        Returns:
+            instance with all attributes already set:
+        """
+        if cls.__name__ == "Rectangle":
+            dummy = cls(8, 2)
+        if cls.__name__ == "Square":
+            dummy = cls(2)
+        dummy.update(**dictionary)
+        return dummy
