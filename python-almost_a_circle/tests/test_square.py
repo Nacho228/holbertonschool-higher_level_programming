@@ -15,7 +15,7 @@ class TestPep8(unittest.TestCase):
         """
         style = pep8.StyleGuide(quiet=False)
         errors = 0
-        files = ["models/base.py", "tests/test_base.py"]
+        files = ["models/square.py", "tests/test_square.py"]
         errors += style.check_files(files).total_errors
         self.assertEqual(errors, 0, 'Need to fix Pep8')
 

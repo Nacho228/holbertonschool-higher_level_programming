@@ -83,13 +83,13 @@ class Base:
         Args:
             list_objs: list of instances to be saved
         """
-        if list_objs is None:
-            list_objs = []
-
-        json = cls.to_json_string([obj.to_dictionary() for obj in list_objs])
-        filename = "{}.json".format(cls.__name__)
-        with open(filename, 'w+') as file:
-            file.write(json)
+        filename = f"{cls.__name__}.json"
+        json_list = []
+        if list_objs is not None:
+            for obj in list_objs:
+                json_list.append(obj.to_dictionary())
+        with open(filename, "w") as file:
+            file.write(cls.to_json_string(json_list))
 
     @staticmethod
     def from_json_string(json_string):

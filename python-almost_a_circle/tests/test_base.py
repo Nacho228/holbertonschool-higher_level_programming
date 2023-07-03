@@ -2,10 +2,7 @@
 """test each method"""
 import unittest
 import pep8
-from models import base
-from models import rectangle
-Base = base.Base
-Rectange = rectangle.Rectangle
+from models.base import Base
 
 
 class TestPep8(unittest.TestCase):
@@ -50,7 +47,7 @@ class TestBase(unittest.TestCase):
             instance.x_or_y("test", -5)
 
     def test_to_json_string(self):
-        """test tojsonstring"""
+        """test to_json_string"""
         instance = Base()
 
         self.assertEqual(instance.to_json_string([]), "[]")
@@ -60,7 +57,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(instance.to_json_string(data), expected_json)
 
     def test_save_to_file(self):
-        """test save to file"""
+        """test save_to_file"""
         instance = Base()
 
         instance.save_to_file([])
@@ -71,7 +68,7 @@ class TestBase(unittest.TestCase):
         instance.save_to_file(instances)
 
     def test_from_json_string(self):
-        """test fromjsonstring"""
+        """test from_json_string"""
         instance = Base()
 
         self.assertEqual(instance.from_json_string("[]"), [])
@@ -82,28 +79,29 @@ class TestBase(unittest.TestCase):
 
     def test_create(self):
         """test create"""
+        from models.rectangle import Rectangle
 
-        rectangle = Base.create(**{"type": "Rectangle", "width": 5, "height": 10})
-        self.assertIsInstance(rectangle, Base)
+        rectangle = Rectangle.create(**{"type": "Rectangle", "width": 5, "height": 10})
+        self.assertIsInstance(rectangle, Rectangle)
         self.assertEqual(rectangle.width, 5)
         self.assertEqual(rectangle.height, 10)
 
     def test_load_from_file(self):
-        """test load from file """
+        """test load_from_file"""
         instance = Base()
 
         filename = "nonexistent.json"
         result = instance.load_from_file(filename)
         self.assertEqual(result, [])
 
-    # Test loading from an empty file
-    # Create an empty JSON file named "empty.json" before running the test case
+        # Test loading from an empty file
+        # Create an empty JSON file named "empty.json" before running the test case
         filename = "empty.json"
         result = instance.load_from_file(filename)
         self.assertEqual(result, [])
 
-    # Test loading from a file with valid data
-    # Create a JSON file named "valid.json"
+        # Test loading from a file with valid data
+        # Create a JSON file named "valid.json"
         filename = "valid.json"
         result = instance.load_from_file(filename)
 
