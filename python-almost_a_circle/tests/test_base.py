@@ -1,8 +1,14 @@
 #!/usr/bin/python3
-"""test each method"""
+"""Unittest for Base class"""
+
+
 import unittest
+import json
 import pep8
-from models.base import Base
+from models import base
+from models import rectangle
+Base = base.Base
+Rectangle = rectangle.Rectangle
 
 
 class TestPep8(unittest.TestCase):
@@ -21,90 +27,182 @@ class TestPep8(unittest.TestCase):
 
 
 class TestBase(unittest.TestCase):
+    """
+    Test class for the Base class.
+    """
+    def test_id_given(self):
+        """
+        Test the ID assignment when an ID is given.
+        """
+        self.assertTrue(Base(1), self.id == 1)
+        self.assertTrue(Base(0), self.id == 0)
+        self.assertTrue(Base(333), self.id == 333)
+        self.assertTrue(Base(-77), self.id == -77)
 
-    def test_integer_validator(self):
-        """ Test integer validator """
-        instance = Base()
+    def test_id_not_given(self):
+        """
+        Test the ID assignment when an ID is not given.
+        """
+        self.assertTrue(Base(), self.id == 1)
+        self.assertTrue(Base(), self.id == 2)
+        self.assertTrue(Base(), self.id == 3)
 
-        instance.integer_validator("test", 5)
-
+    def test_invalid_args(self):
+        """
+        Test for invalid arguments when creating a Base object.
+        """
         with self.assertRaises(TypeError):
-            instance.integer_validator("test", "not an integer")
+            Base(1, 1)
+            Base(1, 1, 1)
 
-        with self.assertRaises(ValueError):
-            instance.integer_validator("test", -5)
+    def test_type_class(self):
+        """
+        Test the class type of the Base object.
+        """
+        self.assertTrue(Base(), self.__class__ == Base)
 
-    def test_x_or_y(self):
-        """test x or y"""
-        instance = Base()
-
-        instance.x_or_y("test", 10)
-
-        with self.assertRaises(TypeError):
-            instance.x_or_y("test", "not an integer")
-
-        with self.assertRaises(ValueError):
-            instance.x_or_y("test", -5)
+    def test_private_attr(self):
+        """
+        Test accessing private attributes of the Base class.
+        """
+        with self.assertRaises(AttributeError):
+            print(Base.__nb_objects)
+            print(Base.nb_objects)
 
     def test_to_json_string(self):
-        """test to_json_string"""
-        instance = Base()
+        """
+        Test the conversion of a dictionary to a JSON string.
+        """
+        dic0 = {"id": 4, "width": 1, "height": 6, "x": 3, "y": 5}
+        dic1 = {"id": 2, "width": 3, "height": 3, "x": 4, "y": 5}
+        json_str = Base.to_json_string([dic0, dic1])
+        self.assertTrue(type(dic0) == dict)
+        self.assertTrue(type(json_str) == str)
+        self.assertTrue(json_str,
+                        [{"id": 4, "width": 1, "height": 6, "x": 3, "y": 5},
+                         {"id": 2, "width": 3, "height": 3, "x": 4, "y": 5}])
 
-        self.assertEqual(instance.to_json_string([]), "[]")
+    def test_none_to_json_string(self):
+        """
+        Test converting None to a JSON string.
+        """
+        dic = None
+        json_str = Base.to_json_string([dic])
+        self.assertTrue(type(json_str) == str)
+        self.assertTrue(json_str, "[]")
 
-        data = [{'name': 'o', 'age': 30}, {'name': 'Pe', 'age': 25}]
-        expected_json = '[{"name": "o", "age": 30}, {"name": "Pe", "age": 25}]'
-        self.assertEqual(instance.to_json_string(data), expected_json)
+    def test_empty_to_json_string(self):
+        """
+        Test converting an empty dictionary to a JSON string.
+        """
+        dic = dict()
+        json_str = Base.to_json_string([dic])
+        self.assertTrue(len(dic) == 0)
+        self.assertTrue(type(json_str) == str)
+        self.assertTrue(json_str, "[]")
 
     def test_save_to_file(self):
-        """test save_to_file"""
-        instance = Base()
+        """
+        Test saving objects to a file.
+        """
+        r0 = Rectangle(1, 2, 3, 4, 5)
+        r1 = Rectangle(9, 8, 7, 6, 5)
+        Rectangle.save_to_file([r0, r1])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(
+                json.dumps([r0.to_dictionary(), r1.to_dictionary()]),
+                file.read())
 
-        instance.save_to_file([])
-        instance1 = Base()
-        instance2 = Base()
-        instances = [instance1, instance2]
+    def test_save_none_to_file(self):
+        """
+        Test saving None to a file.
+        """
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual('[]', file.read())
 
-        instance.save_to_file(instances)
+    def test_save_empty_to_file(self):
+        """
+        Test saving an empty list to a file.
+        """
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual('[]', file.read())
 
     def test_from_json_string(self):
-        """test from_json_string"""
-        instance = Base()
+        """
+        Test the conversion of a JSON string to a list of dictionaries.
+        """
+        json_str = '[{"id": 11, "width": 4, "height": 5, "x": 2, "y": 8},\
+               {"id": 22, "width": 6, "height": 5, "x": 9, "y": 5}]'
+        list_dict = Base.from_json_string(json_str)
+        self.assertTrue(type(json_str) == str)
+        self.assertTrue(type(list_dict) == list)
+        self.assertTrue(type(list_dict[0]) == dict)
+        self.assertTrue(list_dict,
+                        [{"id": 11, "width": 4, "height": 5, "x": 2, "y": 8},
+                         {"id": 22, "width": 6, "height": 5, "x": 9, "y": 5}])
+        self.assertTrue(list_dict[0],
+                        {"id": 11, "width": 4, "height": 5, "x": 2, "y": 8})
 
-        self.assertEqual(instance.from_json_string("[]"), [])
+    def test_from_none_json_string(self):
+        """
+        Test converting None to a list of dictionaries.
+        """
+        json_str = None
+        list_dict = Base.from_json_string(json_str)
+        self.assertTrue(type(list_dict) == list)
+        self.assertTrue(list_dict == [])
 
-        json_string = '[{"name": "J", "age": 30}, {"name": "Ja", "age": 25}]'
-        expected_data = [{'name': 'J', 'age': 30}, {'name': 'Ja', 'age': 25}]
-        self.assertEqual(instance.from_json_string(json_string), expected_data)
+    def test_from_empty_json_string(self):
+        """
+        Test converting an empty JSON string to a list of dictionaries.
+        """
+        json_str = ""
+        list_dict = Base.from_json_string(json_str)
+        self.assertTrue(type(list_dict) == list)
+        self.assertTrue(list_dict == [])
 
     def test_create(self):
-        """test create"""
-        from models.rectangle import Rectangle
-
-        rectangle = Rectangle.create(**{"type": "Rectangle", "width": 5, "height": 10})
-        self.assertIsInstance(rectangle, Rectangle)
-        self.assertEqual(rectangle.width, 5)
-        self.assertEqual(rectangle.height, 10)
+        """
+        Test creating an object using the create() method.
+        """
+        r0 = Rectangle(4, 6, 2, 3, 34)
+        rdic = r0.to_dictionary()
+        r1 = Rectangle.create(**rdic)
+        self.assertEqual(str(r0), '[Rectangle] (34) 2/3 - 4/6')
+        self.assertEqual(str(r1), '[Rectangle] (34) 2/3 - 4/6')
+        self.assertIsNot(r0, r1)
 
     def test_load_from_file(self):
-        """test load_from_file"""
-        instance = Base()
+        """
+        Test loading objects from a file.
+        """
+        r0 = Rectangle(5, 7, 22, 18, 10)
+        r1 = Rectangle(6, 8, 21, 17, 20)
+        Rectangle.save_to_file([r0, r1])
+        recs = Rectangle.load_from_file()
+        self.assertEqual(len(recs), 2)
+        for key, value in enumerate(recs):
+            if key == 0:
+                self.assertEqual(str(value), '[Rectangle] (10) 22/18 - 5/7')
+            if key == 1:
+                self.assertEqual(str(value), '[Rectangle] (20) 21/17 - 6/8')
 
-        filename = "nonexistent.json"
-        result = instance.load_from_file(filename)
-        self.assertEqual(result, [])
+    def test_load_from_none_file(self):
+        """
+        Test loading objects from a None file.
+        """
+        Rectangle.save_to_file(None)
+        recs = Rectangle.load_from_file()
+        self.assertEqual(type(recs), list)
+        self.assertEqual(len(recs), 0)
 
-        # Test loading from an empty file
-        # Create an empty JSON file named "empty.json" before running the test case
-        filename = "empty.json"
-        result = instance.load_from_file(filename)
-        self.assertEqual(result, [])
-
-        # Test loading from a file with valid data
-        # Create a JSON file named "valid.json"
-        filename = "valid.json"
-        result = instance.load_from_file(filename)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_load_from_empty_file(self):
+        """
+        Test loading objects from an empty file.
+        """
+        Rectangle.save_to_file([])
+        recs = Rectangle.load_from_file()
+        self.assertEqual(type(recs), list)
+        self.assertEqual(len(recs), 0)
